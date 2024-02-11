@@ -12,7 +12,16 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/test"); //creating a database called test
+mongoose.connect(
+  "mongodb+srv://rikintuladhar:rVZMNRROkdnfltC4@cluster0.xi0fn2g.mongodb.net/?retryWrites=true&w=majority"
+); //creating a database called test
+
+mongoose.connection.on("error", (error) => {
+  console.log(error);
+});
+mongoose.connection.on("connected", () => {
+  console.log("MongoDb connect");
+});
 
 app.get("/get", (req, res) => {
   TodoModel.find() //find all the data from database
