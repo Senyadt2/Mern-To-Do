@@ -14,21 +14,21 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/get")
+      .get("https://rikintodo.onrender.com/get")
       .then((res) => setTodos(res.data))
       .catch((ex) => console.log(ex));
   }, [todos]);
 
   const handleEdit = (id) => {
     axios
-      .put(`http://localhost:3001/update/${id}`)
+      .put(`https://rikintodo.onrender.com/update/${id}`)
       .then((res) => setTodos(res.data))
       .catch((ex) => console.log(ex));
   };
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/delete/${id}`)
+      .delete(`https://rikintodo.onrender.com/delete/${id}`)
       .then((res) => alert("Deleted"))
       .catch((ex) => console.log(ex));
   };

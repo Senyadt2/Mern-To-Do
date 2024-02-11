@@ -5,15 +5,16 @@ const Create = () => {
   const [task, setTask] = useState();
   const handleAdd = () => {
     axios
-      .post("http://localhost:3001/add", { task: task }) //route add
+      .post("https://rikintodo.onrender.com/add", { task: task }) //route add
       .then((res) => console.log(res))
       .catch((ex) => console.log(ex));
+    setTask("");
   };
   return (
     <div className="create_form">
       <input
         type="text"
-        name=""
+        value={task}
         placeholder="Enter Task"
         onChange={(e) => setTask(e.target.value)}
       />
