@@ -1,22 +1,28 @@
 import axios from "axios";
-import React, { useState } from "react";
+import api from "./utils/api";
+import React, { useState, useContext } from "react";
+import globalcontext from "./GlobalContentProvider/GlobalContext";
 
 const Create = () => {
-  const [task, setTask] = useState();
-  const handleAdd = () => {
-    axios
-      .post("https://rikintodo.onrender.com/add", { task: task }) //route add
-      .then((res) => console.log(res))
-      .catch((ex) => console.log(ex));
+  const { setDataChanged } = useContext(globalcontext);
+  const { postData } = api();
+  const [task, setTask] = useState({
+    task: "",
+  });
+  const handleAdd = async () => {
+    const data = await postData("/add", task);
+    console.log(data);
+    alert("data set");
     setTask("");
+    setDataChanged(true);
   };
   return (
     <div className="create_form">
       <input
         type="text"
-        value={task}
+        value={task.task}
         placeholder="Enter Task"
-        onChange={(e) => setTask(e.target.value)}
+        onChange={(e) => setTask({ task: e.target.value })}
       />
       <button type="button" onClick={handleAdd}>
         Add
